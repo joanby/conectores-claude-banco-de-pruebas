@@ -1,0 +1,121 @@
+{
+ "fc-base": {
+  "turnos": 5,
+  "segundos": 31,
+  "tokens": 262647,
+  "respuesta": "No he podido sacar el kit de marca: no tengo forma de leer el HTML y el CSS reales de la web.\n\n- **Redirección:** `frogamesformacion.com` lleva a `https://cursos.frogamesformacion.com/` (Thinkific).\n- **Lectura de la página:** la herramienta de lectura la convierte a texto y pierde el CSS, las fuentes y las etiquetas del `<head>`. Por eso no tengo colores, tipografías ni logo.\n- **Descarga directa:** `curl` está bloqueado por permisos en esta sesión.\n- **Búsqueda en el repo:** `grep` también está bloqueado fuera de la carpeta de trabajo.\n- **Imagen encontrada:** `https://import.cdn.thinkific.com/630745/custom_site_themes/id/DrVY1MyCQKig9q2qekZ3_todas%20las%20rutas%201920x1080.png`. Es un banner de «todas las rutas», **no el logo**.\n\nNo quiero inventarme los hexadecimales. Dime cuál de estas vías prefieres:\n1. Apruebas el `curl` para que baje el HTML y lo analice.\n2. Me das acceso al repo, donde el kit puede estar en `apps/infrastructure/integration/` o en los estándares de marca de CCOS.\n3. Pegas aquí el CSS del tema de Thinkific."
+ },
+ "fc-mcp": {
+  "turnos": 2,
+  "segundos": 16,
+  "tokens": 117630,
+  "respuesta": "- **Principal:** `#449CB9`\n- **Secundario / acento:** `#449CB9` (es el mismo tono; el sitio no define un segundo color de marca)\n- **Fondo:** `#000000` (tema oscuro)\n- **Texto:** `#AAB2BB`. El texto claro sobre botones y campos es `#FFFFFF` y `#F2F5F7`.\n- **Tipografías:** Outfit para títulos (50 px en h1) e Inter para el cuerpo (17 px).\n- **Logo:** https://import.cdn.thinkific.com/630745%2Fcustom_site_themes%2Fid%2FDYYSHbIRbaoKoRUXpwrw_frogames-logo-website.png\n\nLos colores y las fuentes salen de una extracción automática de la web, con una confianza del 94 %. No los he contrastado con el CSS real de Thinkific."
+ },
+ "pw-base": {
+  "turnos": 6,
+  "segundos": 20,
+  "tokens": 364178,
+  "respuesta": "No he podido empezar el test: no tengo ningún navegador en esta sesión, solo shell. El `curl` a esa página me ha pedido aprobación y no ha llegado a ejecutarse.\n\nAunque lo aprobaras, un `curl` solo descarga el HTML. No podría contestar las 5 primeras preguntas ni ver la 6 si el test se carga con JavaScript. Para hacerlo bien haría falta Chrome conectado a Claude, o Playwright instalado (la carpeta de trabajo está vacía).\n\nDime si apruebo el `curl` por si el test viene ya en el HTML, o si activas el navegador y lo hago de verdad."
+ },
+ "pw-mcp": {
+  "turnos": 22,
+  "segundos": 63,
+  "tokens": 1213956,
+  "respuesta": "- **Pregunta 6** (Vocabulario): «Elige la palabra que completa la frase: We ___ a lot of photos on our holiday.» Las opciones son took / made / did / had.\n- **Total:** 30 preguntas, cinco por cada nivel de A1 a C2. Lo dice la propia página, y el contador del test marca «Pregunta 6 de 30».\n- Contesté las cinco primeras (aunt, lives, There are, On Mondays and Fridays, I'm a web developer). No escribí nombre ni email ni envié ningún formulario. Para poder avanzar rechacé el aviso de cookies y cerré un popup de noticias con Escape. Las respuestas 3 a 5 las pulsé con JavaScript, porque el popup tapaba los botones."
+ },
+ "c7-base": {
+  "turnos": 1,
+  "segundos": 10,
+  "tokens": 51102,
+  "respuesta": "```python\nfrom elevenlabs.client import ElevenLabs\n\nclient = ElevenLabs(api_key=\"TU_API_KEY\")  # o usa la variable de entorno ELEVENLABS_API_KEY\n\ntexto = \"Hola, esto es una prueba de síntesis de voz con tiempos por carácter.\"\n\nresp = client.text_to_speech.convert_with_timestamps(\n    voice_id=\"1npscUJu0UbVeHp4b0zt\",\n    model_id=\"eleven_v4\",\n    text=texto,\n    output_format=\"mp3_44100_128\",\n)\n\nwith open(\"salida.mp3\", \"wb\") as f:\n    f.write(base64.b64decode(resp.audio_base_64))\n\nal = resp.alignment\ntiempos = list(zip(al.characters, al.character_start_times_seconds))\n\nfor caracter, inicio in tiempos:\n    print(f\"{caracter!r}: {inicio:.3f}s\")\n```\n\nFalta el `import base64` al principio; el bloque correcto es:\n\n```python\nimport base64\nfrom elevenlabs.client import ElevenLabs\n\nclient = ElevenLabs()  # lee ELEVENLABS_API_KEY del entorno\n\ntexto = \"Hola, esto es una prueba de síntesis de voz con tiempos por carácter.\"\n\nresp = client.text_to_speech.convert_with_timestamps(\n    voice_id=\"1npscUJu0UbVeHp4b0zt\",\n    model_id=\"eleven_v4\",\n    text=texto,\n    output_format=\"mp3_44100_128\",\n)\n\nwith open(\"salida.mp3\", \"wb\") as f:\n    f.write(base64.b64decode(resp.audio_base_64))\n\nal = resp.alignment\ntiempos = list(zip(al.characters, al.character_start_times_seconds))\n\nfor caracter, inicio in tiempos:\n    print(f\"{caracter!r}: {inicio:.3f}s\")\n```"
+ },
+ "c7-mcp": {
+  "turnos": 1,
+  "segundos": 15,
+  "tokens": 51437,
+  "respuesta": "```python\n# uv add elevenlabs  ·  uv run tts.py\nimport base64\n\nfrom elevenlabs.client import ElevenLabs\n\nclient = ElevenLabs()  # lee ELEVENLABS_API_KEY del entorno\n\nTEXTO = \"Hola, esto es una prueba de síntesis de voz con marcas de tiempo.\"\n\nresp = client.text_to_speech.convert_with_timestamps(\n    voice_id=\"1npscUJu0UbVeHp4b0zt\",\n    text=TEXTO,\n    model_id=\"eleven_v4\",\n)\n\nwith open(\"salida.mp3\", \"wb\") as f:\n    f.write(base64.b64decode(resp.audio_base_64))\n\ntiempos = list(zip(resp.alignment.characters, resp.alignment.character_start_times_seconds))\nprint(tiempos)\n```"
+ },
+ "c7b-base": {
+  "turnos": 1,
+  "segundos": 9,
+  "tokens": 51100,
+  "respuesta": "```\nnpm install -g @playwright/cli@latest\nplaywright-cli open https://example.com\nplaywright-cli snapshot\nplaywright-cli click e6\nplaywright-cli screenshot --filename=more-information.png\n```\n\n`e6` es un ejemplo. Usa la referencia que aparezca junto a `link \"More information...\"` en la salida de `snapshot`. Tras el clic, el CLI vuelve a imprimir el snapshot de la nueva página.\n\nNo he podido ejecutarlos aquí, así que están escritos de memoria. Comprueba los nombres de las opciones con `playwright-cli --help`."
+ },
+ "c7b-mcp": {
+  "turnos": 4,
+  "segundos": 16,
+  "tokens": 211716,
+  "respuesta": "```bash\nnpm install -g @playwright/cli@latest\nplaywright-cli open https://example.com\nplaywright-cli snapshot\nplaywright-cli click e6\nplaywright-cli screenshot --filename=captura.png\n```\n\n`e6` es la referencia que suele tener el enlace \"More information\" en example.com. Confírmala en la salida de `open` o `snapshot`, donde aparece como `link \"More information...\" [ref=e6]`, y sustitúyela si es otra."
+ },
+ "sp-base": {
+  "turnos": 5,
+  "segundos": 23,
+  "tokens": 156084,
+  "respuesta": "He creado `iban.py` con `validar_iban_es(texto) -> bool`.\n\n- **Qué comprueba:** que el texto sea `ES` más 22 dígitos y que cumpla el dígito de control mod 97 (ISO 13616).\n- **Qué tolera:** mayúsculas o minúsculas, y espacios o guiones como separadores.\n- **Qué rechaza:** otros países, longitudes incorrectas, cadena vacía y dígitos Unicode que no sean 0-9.\n\n**Pruebas:** pasan los doctests y los casos que probé a mano. Eso incluye un IBAN válido con espacios, minúsculas y guiones, uno con el último dígito cambiado, uno de GB y uno truncado. La primera versión aceptaba dígitos de ancho completo (como `９`) porque usaba `\\d`. Lo cambié a `[0-9]`.\n\n**No comprobado:** los dígitos de control nacionales del CCC, es decir, los dos dígitos de control que lleva dentro la cuenta de 20 dígitos. Para validar un IBAN basta con mod 97, y algunos IBAN de pruebas de bancos no pasan el control del CCC. Si prefieres que también lo compruebe, dímelo y lo añado."
+ },
+ "sp-plugin": {
+  "turnos": 3,
+  "segundos": 18,
+  "tokens": 105620,
+  "respuesta": "He creado `iban.py` con `validar_iban_es(texto) -> bool`.\n\n- **Entrada admitida:** ignora espacios y mayúsculas/minúsculas, así que `es91 2100 0418 4502 0005 1332` es válido.\n- **Qué comprueba:** que el formato sea `ES` + 22 dígitos y que cumpla el dígito de control mod 97 del estándar ISO 7064.\n- **Pruebas:** lo probé con `uv run` con un IBAN válido (con y sin espacios), uno con el dígito alterado, uno francés, uno demasiado corto y una cadena vacía. Los seis casos dan el resultado esperado.\n- **Qué no comprueba:** no valida los dígitos de control internos del CCC (los de banco/oficina/cuenta) ni que la cuenta exista. Si lo necesitas, es un añadido pequeño.\n- **Entrada no texto:** una entrada que no sea `str`, como `None`, lanza excepción y no devuelve `False`. No he añadido programación defensiva, según tus reglas.\n\nLas pruebas fueron un script suelto y no las he dejado en el repo. Puedo añadir un `test_iban.py` si lo quieres."
+ },
+ "contexto_hola": {
+  "ninguno": 50984,
+  "firecrawl": 57263,
+  "playwright": 51371,
+  "context7": 51310,
+  "todos": 57902
+ },
+ "kit_marca": {
+  "principal": "#449CB9",
+  "fondo": "#000000",
+  "texto": "#AAB2BB",
+  "cuerpo": "Inter 17 px",
+  "h1": "50 px",
+  "titulos_declarado": "Outfit, Montserrat, system-ui, sans-serif",
+  "fuentes_cargadas": [
+   "Montserrat",
+   "Inter"
+  ],
+  "se_ve": "Montserrat",
+  "aciertos": 5,
+  "datos": 6
+ },
+ "playwright": {
+  "pregunta6": "We ___ a lot of photos on our holiday.",
+  "opciones": [
+   "took",
+   "made",
+   "did",
+   "had"
+  ],
+  "total": 30,
+  "respuestas_1_5": [
+   "aunt",
+   "lives",
+   "There are",
+   "On Mondays and Fridays",
+   "I'm a web developer"
+  ],
+  "contexto_leido": {
+   "sin": 324088,
+   "con": 1174141,
+   "veces": 3.6
+  },
+  "segundos": {
+   "sin": 20,
+   "con": 63
+  }
+ },
+ "iban": {
+  "base": "9/10",
+  "plugin": "9/10",
+  "skills_cargadas": 15,
+  "skills_usadas": 0,
+  "fallo_comun": "IBAN que cuadra el control ISO pero con los dígitos de control de la cuenta (CCC) mal"
+ },
+ "curso": {
+  "titulo": "Programador de IA: De Vibe Coder a Ingeniero Agéntico",
+  "url": "cursos.frogamesformacion.com/courses/vibe-coder"
+ }
+}
